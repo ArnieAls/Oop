@@ -10,45 +10,50 @@
 <body>
 <?php
 
-$products = [
+define('STATUS_CLOSED', 0);   // Closed, working fine
+define('STATUS_OPEN', 1);     // Open for play
+define('STATUS_BROKEN', 2);   // Closed with a reason
+define('PROBLEM_PRIORITY_LOW', 0);    // Need planing
+define('PROBLEM_PRIORITY_MID', 1);    // Period 30 days
+define('PROBLEM_PRIORITY_HIGH', 2);   // Period 1 week
+define('PROBLEM_PRIORITY_URGENT', 3); // Today (ASAP)
+$bowling = [
     [
-        [
-            'name' => 'Kiaušiniai',
-            'qty' => 3,
+        'status' => STATUS_OPEN,
+        'pins' => [
+            [true, false, false, true],
+            [false, false, true],
+            [false, true],
+            [true]
         ],
-        [
-            'name' => 'Grietinė',
-            'qty' => 1,
-        ],
-        [
-            'name' => 'Jogurtas',
-            'qty' => 2,
-        ],
-        [
-            'name' => 'Žuvis',
-            'qty' => 0,
-        ],
+        'problems' => [
+            [
+                'message' => 'Missing one of the chairs by the table',
+                'priority' => PROBLEM_PRIORITY_MID
+            ]
+        ]
     ],
     [
-        [
-            'name' => 'Pienas',
-            'qty' => 1,
+        'status' => STATUS_BROKEN,
+        'pins' => [
+            [false, false, false, false],
+            [false, false, false],
+            [false, false],
+            [false]
         ],
-        [
-            'name' => 'Kefyras',
-            'qty' => 0,
-        ],
-        [
-            'name' => 'Degtinė',
-            'qty' => 2,
-        ],
-        [
-            'name' => 'Kečupas',
-            'qty' => 2,
-        ],
-    ],
+        'problems' => [
+            [
+                'message' => 'Client pissed the floor all over, need to clean it before opening',
+                'priority' => PROBLEM_PRIORITY_URGENT
+            ],
+            [
+                'message' => 'Some of the bowls are old',
+                'priority' => PROBLEM_PRIORITY_LOW
+            ]
+        ]
+    ]
 ];
-var_dump($products);
+var_dump($bowling);
 ?>
 </body>
 </html>
