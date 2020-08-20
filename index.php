@@ -1,6 +1,6 @@
 <?php
-$money = rand(0, 15);
-$bokal_cost = 3;
+$money = rand(0, 25);
+$bokal_cost = 3.5;
 $bokal_count = floor($money / $bokal_cost);
 $money_spent = number_format($bokal_count * $bokal_cost, 2);
 $p = "Viso sumokėta $money_spent eur"
