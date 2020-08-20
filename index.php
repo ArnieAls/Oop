@@ -1,59 +1,34 @@
+<?php
+$money = rand(0, 15);
+$bokal_cost = 3;
+$bokal_count = floor($money / $bokal_cost);
+$money_spent = number_format($bokal_count * $bokal_cost, 2);
+$p = "Viso sumokėta $money_spent eur"
+?>
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>array</title>
+    <title>Alus</title>
+    <style>
+        .beer-container {
+            display: flex;
+        }
+        .beer {
+            background-image: url("https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2F1.bp.blogspot.com%2F-Ht7b9u8y7z8%2FUBkvmVbhKMI%2FAAAAAAAAF8w%2Frw_RXFF83VA%2Fs1600%2FBeer_Wallpaper%2B(62).jpg&f=1&nofb=1");
+            background-position: center;
+            background-size: cover;
+            width: 100px;
+            height: 100px;
+        }
+    </style>
 </head>
 <body>
-<?php
-
-define('STATUS_CLOSED', 0);   // Closed, working fine
-define('STATUS_OPEN', 1);     // Open for play
-define('STATUS_BROKEN', 2);   // Closed with a reason
-define('PROBLEM_PRIORITY_LOW', 0);    // Need planing
-define('PROBLEM_PRIORITY_MID', 1);    // Period 30 days
-define('PROBLEM_PRIORITY_HIGH', 2);   // Period 1 week
-define('PROBLEM_PRIORITY_URGENT', 3); // Today (ASAP)
-$bowling = [
-    [
-        'status' => STATUS_OPEN,
-        'pins' => [
-            [true, false, false, true],
-            [false, false, true],
-            [false, true],
-            [true]
-        ],
-        'problems' => [
-            [
-                'message' => 'Missing one of the chairs by the table',
-                'priority' => PROBLEM_PRIORITY_MID
-            ]
-        ]
-    ],
-    [
-        'status' => STATUS_BROKEN,
-        'pins' => [
-            [false, false, false, false],
-            [false, false, false],
-            [false, false],
-            [false]
-        ],
-        'problems' => [
-            [
-                'message' => 'Client pissed the floor all over, need to clean it before opening',
-                'priority' => PROBLEM_PRIORITY_URGENT
-            ],
-            [
-                'message' => 'Some of the bowls are old',
-                'priority' => PROBLEM_PRIORITY_LOW
-            ]
-        ]
-    ]
-];
-var_dump($bowling);
-?>
+<div class="beer-container">
+    <?php for ($i = 1; $i <= $bokal_count; $i++): ?>
+        <div class="beer"></div>
+    <?php endfor; ?>
+</div>
+<p><?php print $p; ?></p>
 </body>
 </html>
