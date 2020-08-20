@@ -9,34 +9,46 @@
 </head>
 <body>
 <?php
-define('ITEM_LOST', 0);
-define('ITEM_IN_USE', 1);
-define('ITEM_EMPTY', 2);
-$games = [
-    [
-        'user' => 'Petras Pizdzius',
-        'item' => [
-            'name' => 'telefonas',
-            'status' => ITEM_LOST,
 
+$products = [
+    [
+        [
+            'name' => 'Kiaušiniai',
+            'qty' => 3,
+        ],
+        [
+            'name' => 'Grietinė',
+            'qty' => 1,
+        ],
+        [
+            'name' => 'Jogurtas',
+            'qty' => 2,
+        ],
+        [
+            'name' => 'Žuvis',
+            'qty' => 0,
         ],
     ],
     [
-        'user' => 'Tomas Ablomas',
-        'item' => [
-            'name' => 'buljonas',
-            'status' => ITEM_IN_USE,
+        [
+            'name' => 'Pienas',
+            'qty' => 1,
         ],
-    ],
-    [
-        'user' => 'Ana Snitkova',
-        'item' => [
-            'name' => 'rulonas',
-            'status' => ITEM_EMPTY,
+        [
+            'name' => 'Kefyras',
+            'qty' => 0,
+        ],
+        [
+            'name' => 'Degtinė',
+            'qty' => 2,
+        ],
+        [
+            'name' => 'Kečupas',
+            'qty' => 2,
         ],
     ],
 ];
-var_dump($games);
+var_dump($products);
 ?>
 </body>
 </html>
