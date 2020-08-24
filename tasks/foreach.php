@@ -1,183 +1,80 @@
-<!------------------------Asociatyvūs masyvai----------------- -->
-<!--1. Sukurti masyvą, kuris aprašytų knygos duomenis: title, author, year, genre -->
 <?php
-$book1 = [
-  'title' => 'Alisa stebuklų šalyje',
-  'author' => 'Lewis Carroll',
-  'year' => 1865,
-  'genre' => ['Adventure', 'Drama', 'Fantasy']
+$vilnius = [
+    "mayor" => 'Remigijus Šimašius',
+    "number"  => '+370 35 654 84',
+    "area"  => 401,
+    "elderships" => [
+        [
+            "title" => "Antakalnio Seniūnija",
+            "address" => "Antakalnio g. 17, 10312 Vilnius",
+            "elder" => "Taurintas Rudys",
+            "population" => 52369
+        ],
+        [
+            "title" => "Fabijoniškių Seniūnija",
+            "address" => "S. Stanevičiaus g. 24, LT-07102 Vilnius",
+            "elder" => "Jonas Novikevičius",
+            "population" => 22369
+        ],
+        [
+            "title" => "Grigiškių Seniūnija",
+            "address" => "Vilniaus g. 6, LT-27101 Grigiškės, Vilniaus m. sav.",
+            "elder" => "Leonard Klimovič",
+            "population" => 32111
+        ],
+        [
+            "title" => "Naujininkų Seniūnija",
+            "address" => "Dariaus ir Girėno g. 11, LT-02170 Vilnius",
+            "elder" => "Raimondas Lingys",
+            "population" => 37001
+        ],
+        [
+            "title" => "Senamiesčio seniūnija",
+            "address" => "Odminių g. 3, LT-01122 Vilnius",
+            "elder" => "Irena Paukštytė",
+            "population" => 19423
+        ],
+    ],
 ];
-// print $book1['year']; // 1865
-// print $book1['genre'][1]; // Drama
 
 ?>
-<!--2. Sukurti masyvą, kurio elementai būtų masyvai aprašantys knygas -->
-<?php
-$books = [
-  [
-    'title' => 'Alice in wonderland',
-    'author' => 'Lewis Carroll',
-    'year' => 1865,
-    'genres' => ['Adventure', 'Drama', 'Fantasy']
-  ],
-  [
-    'title' => 'The Decameron',
-    'author' => 'Giovanni Boccaccio',
-    'year' => 1353,
-    'genres' => ['Story collection']
-  ],
-  [
-    'title' => 'The 120 Days of Sodom',
-    'author' => 'Marquis de Sade',
-    'year' => 1789,
-    'genres' => ['Novel']
-  ],
-  [
-    'title' => 'Droll Stories',
-    'author' => 'Honoré de Balzac',
-    'year' => 1837,
-    'genres' => ['Short stories']
-  ]
-]
-?>
-<!--3. Išvesti visus knygų masyvo elementus su var_dump; -->
-<?php
-foreach ($books as $book) {
-  // var_dump($book);
-}
-?>
-<!--4. Išvesti visų knygų pavadinimus, atskirtu kableliu ir tarpu -->
-<?php
-// 4.1 - Naudojant ternary operatorių
-// foreach ($books as $index => $book) {
-//   print $book['title'] . ($index === count($books) - 1 ? null : ', ');
-// }
-// echo '<hr/>';
-// // 4.2 - Naudojant substr funkciją
-// $bookListView = '';
-// $separator = ', ';
-// foreach ($books as $book) {
-//   $bookListView .= $book['title'] . $separator;
-// }
-// print substr($bookListView, 0, -1 *(strlen($separator)));
-// echo '<hr/>';
 
-// // 4.3 - Naudojant (array) join metodą - Geriausias dėl "single responsibility" design principo
-// $bookTitles = [];
-// foreach ($books as $book) {
-//   $bookTitles[] = $book['title'];
-// }
-// print join(', ', $bookTitles);
-// echo '<hr/>';
-?>
-<!--5. Išvesti visus knygų masyvo elementus lentele; -->
+<!--3. print visus pavadinimus-->
 <?php
-$gridRowsView = '';
-// 5.1 - Formuojant kaip stringus
-foreach ($books as $book) {
-  $gridRowView = '<div class="grid-books__row">';
-  $gridRowView .= '<div class="grid-books__col">' . $book['title'] . '</div>';
-  $gridRowView .= '<div class="grid-books__col">' . $book['author'] . '</div>';
-  $gridRowView .= '<div class="grid-books__col">' . $book['year'] . '</div>';
-  $gridRowView .= '<div class="grid-books__col">' . join(', ', $book['genres']) . '</div>';
-  $gridRowView .= '</div>';
-  $gridRowsView .= $gridRowView;
-}
-?>
-<!-- <div class="grid-books">
-  <div class="grid-books__row grid-books__row--header">
-    <div class="grid-books__col">Pavadinimas</div>
-    <div class="grid-books__col">Autorius</div>
-    <div class="grid-books__col">Metai</div>
-    <div class="grid-books__col">Žanrai</div>
-  </div>
-  <?= $gridRowsView ?>
-</div> -->
 
+foreach ($vilnius['elderships'] as $eldership)
+    print $eldership['title']."<br>";
+
+?>
+<!-- 4. Atspaudinkite vienos iš seniunijų duomenis -->
 <?php
-// 5.2 Formuojant tiesiai į HTML - Šiuo atveju geresnis variantas
-function printBooks($books, $title)
+foreach ($vilnius as $elderships => $eldership)
+print($eldership[1]['title']. ' ' .$eldership[1]['address']. ' ' .$eldership[1]['elder']. ' ' .$eldership[1]['population']);
+?>
+
+<!-- 5. Atspausdinkite visų seniunijų duomenis lentele -->
+<?php
+function printElderships($vilnius)
 {
 ?>
-  <h3><?= $title?></h3>
-  <div class="grid-books">
+    <h3>Seniūnijos</h3>
+    <div class="grid-books">
     <div class="grid-books__row grid-books__row--header">
-      <div class="grid-books__col">Pavadinimas</div>
-      <div class="grid-books__col">Autorius</div>
-      <div class="grid-books__col">Metai</div>
-      <div class="grid-books__col">Žanrai</div>
+        <div class="grid-books__col">Title</div>
+        <div class="grid-books__col">Address</div>
+        <div class="grid-books__col">Elder</div>
+        <div class="grid-books__col">Population</div>
     </div>
-    <?php foreach ($books as $book) : ?>
-      <div class="grid-books__row">
-        <div class="grid-books__col"><?= $book['title'] ?></div>
-        <div class="grid-books__col"><?= $book['author'] ?></div>
-        <div class="grid-books__col"><?= $book['year'] ?></div>
-        <div class="grid-books__col"><?= join(', ', $book['genres']) ?></div>
-      </div>
+    <?php foreach ($vilnius['elderships'] as $eldership) : ?>
+        <div class="grid-books__row">
+            <div class="grid-books__col"><?= $eldership['title'] ?></div>
+            <div class="grid-books__col"><?= $eldership['address'] ?></div>
+            <div class="grid-books__col"><?= $eldership['elder'] ?></div>
+            <div class="grid-books__col"><?= $eldership['population'] ?></div>
+        </div>
     <?php endforeach; ?>
-  </div>
+</div>
 <?php
 }
-printBooks($books, 'All Books');
+printElderships($elderships);
 ?>
-<!--6. Išvesti visų visų knygų metų vidurkį; -->
-<?php
-// 6.1 - Būdas pagal formulę
-$sum = 0;
-foreach ($books as $book) {
-  $sum += $book['year'];
-}
-$yearAvg = $sum / count($books);
-?>
-<div><?= $yearAvg ?></div>
-
-<?php
-// 6.2 - Iteracinis būdas
-$yearAvg = 0;
-foreach ($books as $book) {
-  $yearAvg += $book['year'] / count($books);
-}
-?>
-<div><?= $yearAvg ?></div>
-<!--7. Išrikiuoti masyvą pagal metus; -->
-<?php
-function byYear($currentBook, $nextBook ){
-    return $currentBook['year'] - $nextBook['year'];
-}
-$booksSortedByYear = $books;
-usort($booksSortedByYear, 'byYear');
-printBooks($booksSortedByYear, 'Knygos isrikiuotos pagal metus');
-?>
-
-<!--8. Išrikiuoti masyvą pagal pavadinimus -->
-
-<?php
-function byTitle($currentBook, $nextBook ){
-       if ($nextBook['title'] == $currentBook['title'])
-       return strcmp($nextBook['title'], $currentBook['title']);
-}
-
-$booksSortedByTitle = $books;
-usort($booksSortedByTitle, 'byTitle');
-printBooks($booksSortedByTitle, 'Knygos isrikiuotos pagal pavadinima');
-
-?>
-<!--Isrikiuoti masyva pagal autoriu-->
-<?php
-function byAuthor($currentBook, $nextBook ){
-        return strcmp($currentBook['author'], $nextBook['author']);
-}
-
-$booksSortedByAuthor = $books;
-usort($booksSortedByAuthor, 'byAuthor');
-printBooks($booksSortedByAuthor, 'Knygos isrikiuotos pagal autoriu');
-
-?>
-<!--10. Isrikiuoti masyva pagal zanru kieki-->
-function byGenre($currentBook, $nextBook ){
-return count($currentBook['genre']) - count($nextBook['genre']);
-}
-
-$booksSortedByGenre = $books;
-usort($booksSortedByGenre, 'byGenre');
-printBooks($booksSortedByGenre, 'Knygos isrikiuotos pagal zanru kieki');
