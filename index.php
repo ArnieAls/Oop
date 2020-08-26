@@ -116,6 +116,7 @@ if (isset($_POST['login'])) {
 </body>
 </html>
 
+<!--versija validate-->
 <?php
 function isEqual($val1, $val2){
     return $val1 === $val2;
@@ -124,20 +125,30 @@ if (isset($_POST['register'])) {
     $passwordsAreEqual = isEqual($_POST['password'], $_POST['repeat-password']);
 }
 ?>
-<form class="form" method="POST">
-    <div class="form__title">Registracija</div>
-    <div class="input-group">
-        <label for="email">Paštas</label>
-        <input type="email" id="email" name="email">
-    </div>
-    <div class="input-group">
-        <label for="password">Slaptažodis</label>
-        <input type="password" id="password" name="password">
-    </div>
-    <div class="input-group">
-        <label for="password">Pakartokite slaptažodį</label>
-        <input type="password" id="password" name="repeat-password">
-    </div>
-    <button type="submit">Registruotis</button>
-    <input type="hidden" name="register" value="1">
-</form>
+    <form class="form" method="POST">
+        <div class="form__title">Registracija</div>
+        <div class="input-group">
+            <label for="email">Paštas</label>
+            <input type="email" id="email" name="email">
+        </div>
+        <div class="input-group">
+            <label for="password">Slaptažodis</label>
+            <input type="password" id="password" name="password">
+        </div>
+        <div class="input-group">
+            <label for="password">Pakartokite slaptažodį</label>
+            <input type="password" id="password" name="repeat-password">
+        </div>
+        <button type="submit">Registruotis</button>
+        <input type="hidden" name="register" value="1">
+    </form>
+    <!-- Jeigu buvo pa'submit'inta registracijos forma -->
+<?php if (isset($_POST['register'])) : ?>
+    <?php if ($passwordsAreEqual) : ?>
+        <h3 class="text--success">Registracija sėkminga</h3>
+        <!-- Kitas kodas kuris nukreipia į pagrindinį puslapį -->
+    <?php else : ?>
+        <h3 class="text--error">Registracija nepavyko</h3>
+        <!-- Kitas kodas, kuris išspausdina klaidas -->
+    <?php endif; ?>
+<?php endif; ?>
