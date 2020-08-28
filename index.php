@@ -1,29 +1,32 @@
 <?php
 require 'functions/html.php';
 $form = [
-    'attr' => [
-        'action' => 'index.php',
-        'method' => 'POST',
-        'class' => 'my-form',
-        'id' => 'login-form'
-    ],
+    'attr' =>
+        [
+            'action' => 'index.php',
+            'method' => 'POST',
+            'class' => 'my-form',
+            'id' => 'login-form'
+        ],
     'fields' => [
-        'email' => 'E-Mail',
-        'type' => 'email',
-        'value' => 'test-mail',
-        'extra' => [
-            'attr' => [
-                'class' => 'email-field',
-                'placeholder' => 'asd@asd.com',
+        'email' => [
+            'label' => 'E-mail',
+            'type' => 'email',
+            'value' => 'test-email',
+            'extra' => [
+                'attr' => [
+                    'class' => 'email-field',
+                    'placeholder' => 'tomas@kamon.lt'
+                ]
             ]
         ]
     ],
     'buttons' => [
         'save' => [
-            'title' => 'Join',
+            'title' => 'Submit the form',
             'extra' => [
                 'attr' => [
-                    'class' => 'big-button'
+                    'class' => 'btn-submit',
                 ]
             ]
         ]
@@ -37,7 +40,7 @@ $form = [
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Forms templates</title>
+    <title>FORMS FORM ARRAYS</title>
 </head>
 <body>
 <?php include 'templates/form.tpl.php'; ?>

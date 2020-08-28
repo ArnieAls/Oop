@@ -30,20 +30,36 @@ function input_attr(string $field_id, array $field): string
     $attributes += $field['extra']['attr'] ?? [];
     return html_attr($attributes);
 }
-
 /**
- * Generates buttons
+ * Generating buttons from given array
  *
  * @param string $button_id
- * @param array $butoon
+ * @param array $button
  * @return string
  */
-//function button_attr(string $button_id, array $button): string
+function button_attr(string $button_id, array $button): string
+{
+    $attributes = [
+        'name' => 'action',
+        'value' => $button_id,
+    ];
+    $attributes += $button['extra']['attr'] ?? [];
+    return html_attr($attributes);
+}
+
+///**
+// * Generates label tag from given array
+// *
+// * @param $label_id
+// * @param $label
+// * @return string
+// */
+//function label_attr($label_id, $label): string
 //{
 //    $attributes = [
-//        'name' => $button_id,
-//        'value' => $button['save'],
+//        'name' => $label_id,
+//        'value' => $label['value'],
 //    ];
-//    $attributes += $button['save']['title']['extra'] ?? [];
+//    $attributes += $label['extra']['attr'] ?? [];
 //    return html_attr($attributes);
 //}
