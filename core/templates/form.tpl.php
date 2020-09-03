@@ -15,17 +15,18 @@
                     </option>
                 <?php endforeach; ?>
             </select>
-
         <?php else : ?>
             <!-- Input field -->
             <input <?php print input_attr($field_id, $field); ?> />
-
+        <?php endif; ?>
+        <!--error's messages -->
+        <?php if (isset($field['error'])): ?>
+            <span><?php print $field['error']; ?></span>
         <?php endif; ?>
         <?php if (isset($field['label'])) : ?>
             </label>
         <?php endif; ?>
     <?php endforeach; ?>
-
     <!-- Generating buttons -->
     <?php foreach ($form['buttons'] ?? [] as $button_id => $button) : ?>
         <button <?php print button_attr($button_id, $button); ?>>
