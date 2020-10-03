@@ -1,8 +1,19 @@
 <?php
-ini_set("xdebug.var_display_max_children", '-1');
-ini_set("xdebug.var_display_max_data", '-1');
-ini_set("xdebug.var_display_max_depth", '-1');
 
-require'core/functions/html.php';
-require 'core/functions/form/core.php';
-require 'core/functions/form/validators.php';
+define('ROOT', __DIR__);
+define('DB_FILE', ROOT . '\app\data\db.json');
+
+session_start();
+
+require 'vendor/autoload.php';
+require 'app/config/router.php';
+require 'core/functions/html.php';
+require 'core/functions/file.php';
+require 'core/functions/validators.php';
+require 'app/functions/form/validators.php';
+require 'app/functions/html/html.php';
+require 'app/functions/form/auth.php';
+
+$app = new App\App();
+
+
