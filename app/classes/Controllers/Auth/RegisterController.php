@@ -1,9 +1,12 @@
 <?php
 
+namespace App\Controllers\Auth;
+
 use App\Abstracts\Controller;
 use App\App;
 use App\Users\User;
 use App\Views\Forms\RegisterForm;
+use Core\Router;
 
 class RegisterController extends Controller
 {
@@ -46,13 +49,12 @@ class RegisterController extends Controller
                 $user = new User($registerForm->getSubmitData());
 
                 App::$db->insertRow('users', $user->_getData());
-                header('Location: login.php');
+                Router::redirect('login');
                 exit;
             }
         }
 
         $this->page->setTitle('Registration');
-        $this->page->addCss('../css/style.css');
         $this->page->setContent($registerForm->render());
         return $this->page->render();
     }

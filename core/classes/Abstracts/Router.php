@@ -28,8 +28,8 @@ abstract class Router
     /**
      * We will call this as follows:
      * Router::add('login', '/login', '\App\Controllers\Auth\LoginController', 'index')
-     * ^ all route::add code should be included in app\config\router.php
-     * router.php should be included immediately after classes autoload,
+     * ^ all route::add code should be included in app\config\routes.php
+     * routes.php should be included immediately after classes autoload,
      * before new App() in bootloader
      *
      * Goal is to add entry to $this->routes

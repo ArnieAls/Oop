@@ -40,8 +40,11 @@
             <?php print $button['title'] ?>
 		</button>
     <?php endforeach; ?>
-    <?php if (isset($data['error'])): ?>
-		<span><?php print $data['error'] ?></span>
-    <?php endif; ?>
 	<!--	End generating buttons-->
+
+    <?php if (isset($data['error'])): ?>
+        <div class="form-box">
+            <span class="error"><?php print $data['error']; ?></span>
+        </div>
+    <?php endif; ?>
 </form>

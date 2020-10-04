@@ -4,6 +4,7 @@ use App\Abstracts\Controller;
 use App\App;
 use App\Views\Forms\LoginForm;
 use App\Views\Pages\BasePage;
+use Core\Router;
 use Core\Views\Content;
 
 class LoginController extends Controller
@@ -44,13 +45,15 @@ class LoginController extends Controller
         if ($loginForm->isSubmitted()) {
             if ($loginForm->validate()) {
                 App::$session->login($loginForm->getSubmitData()['email'], $loginForm->getSubmitData()['password'])
-                    ? header('Location: index.php') : $error = 'Something wrong!';
+                    ? Router::redirect('index') : $error = 'Something wrong!';
             }
         }
 
+        $content = new Content(['form' => $loginForm->render(), 'error' => $error ?? null]);
+
         $this->page->setTitle('Login');
         $this->page->addCss('../css/style.css');
-        $this->page->setContent($loginForm->render());
+        $this->page->setContent($content->render());
         return $this->page->render();
     }
 }

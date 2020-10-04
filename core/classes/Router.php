@@ -7,8 +7,8 @@ class Router extends Abstracts\Router
     /**
      * We will call this as follows:
      * Router::add('login', '/login', '\App\Controllers\Auth\LoginController', 'index')
-     * ^ all route::add code should be included in app\config\router.php
-     * router.php should be included immediately after classes autoload,
+     * ^ all route::add code should be included in app\config\routes.php
+     * routes.php should be included immediately after classes autoload,
      * before new App() in bootloader
      *
      * Goal is to add entry to $this->routes
@@ -48,25 +48,10 @@ class Router extends Abstracts\Router
         return self::$routes[$name]['url'] ?? null;
     }
 
-    /**
-     * Gets route based on current URL ($_SERVER['REQUEST_URI'])
-     * creates controller instance and executes its method
-     *
-     * Note, that urls could have parameters like products?id=3
-     * it should ignore it while choosing the right controller
-     *
-     * Returns the html string, that the controller returns
-     *
-     * @return string HTML
-     */
-    public static function run(): ?string
+    public static function redirect ($name)
     {
-        $route = self::getRouteByUrl($_SERVER['REQUEST_URI']);
-        if ($route) {
-            $controller = self::getControllerInstance($route['controller_name']);
-            return $controller->{$route['controller_method']}();
-        }
-        return null;
+        header('Location:'. self::getUrl($name));
+        exit;
     }
 
     /**
@@ -95,5 +80,28 @@ class Router extends Abstracts\Router
     protected static function getControllerInstance(string $controller_name)
     {
         return $instance = new $controller_name();
+    }
+
+    /**
+     * Gets route based on current URL ($_SERVER['REQUEST_URI'])
+     * creates controller instance and executes its method
+     *
+     * Note, that urls could have parameters like products?id=3
+     * it should ignore it while choosing the right controller
+     *
+     * Returns the html string, that the controller returns
+     *
+     * @return string HTML
+     */
+    public static function run(): ?string
+    {
+        $route = self::getRouteByUrl($_SERVER['REQUEST_URI']);
+
+        if ($route) {
+            $controller = self::getControllerInstance($route['controller_name']);
+            return $controller->{$route['controller_method']}();
+        }
+
+        return null;
     }
 }

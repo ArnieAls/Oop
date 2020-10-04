@@ -1,7 +1,9 @@
 <?php
 
 namespace Core\Abstracts\Views;
+
 use Core\View;
+
 /**
  * Class Page
  *
@@ -13,6 +15,14 @@ use Core\View;
  */
 abstract class Page extends View
 {
+    protected $data = [
+        'title' => 'Default Page',
+        'css' => [],
+        'js' => [],
+        'header' => null,
+        'content' => null,
+        'footer' => null,
+    ];
 
     abstract public function setTitle(string $title): void;
     /**

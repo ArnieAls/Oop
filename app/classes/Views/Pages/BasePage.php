@@ -1,8 +1,10 @@
 <?php
+
 namespace App\Views\Pages;
 
 use App\Views\Navigation;
-use Core\Abstracts\Views\Page;
+use Core\Views\Footer;
+use Core\Views\Page;
 
 class BasePage extends Page
 {
@@ -21,75 +23,12 @@ class BasePage extends Page
     public function __construct()
     {
         $nav = new Navigation();
+        $footer = new Footer();
 
+        $this->addCSS('https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css');
         $this->addCSS('assets/css/style.css');
         $this->setHeader($nav->render());
-        $this->setContent('Main');
-        $this->setFooter('Footer');
-    }
-
-    /**
-     * Čia galėsime nustatyti $data['title'] jau sukūrus Page objektą
-     *
-     * @param string $title
-     */
-    public function setTitle(string $title): void
-    {
-        // TODO: Implement setTitle() method.
-    }
-
-    /**
-     * Čia galėsime įtraukti CSS'o path'ą į $data['css'] masyvą,
-     * kuris paskui foreach'insis page'o template
-     *
-     * @param string $url
-     */
-    public function addCSS(string $url): void
-    {
-        // TODO: Implement addCSS() method.
-    }
-
-    /**
-     * Čia galėsime įtraukti JS'o path'ą į $data['js'] masyvą,
-     * kuris paskui foreach'insis page'o template
-     *
-     * @param string $url
-     */
-    public function addJS(string $url): void
-    {
-        // TODO: Implement addJS() method.
-    }
-
-    /**
-     * Čia galėsime nustatyti $data['header']`io html'ą
-     * kuris bus išspausdinamas page template
-     *
-     * @param string $header_html
-     */
-    public function setHeader(string $header_html): void
-    {
-        // TODO: Implement setHeader() method.
-    }
-
-    /**
-     * Čia galėsime nustatyti $data['content']`o html'ą
-     * kuris bus išspausdinamas page template
-     *
-     * @param string $content_html
-     */
-    public function setContent(string $content_html): void
-    {
-        // TODO: Implement setContent() method.
-    }
-
-    /**
-     * Čia galėsime nustatyti $data['footer']`io html'ą
-     * kuris bus išspausdinamas page template
-     *
-     * @param string $footer_html
-     */
-    public function setFooter(string $footer_html): void
-    {
-        // TODO: Implement setFooter() method.
+        $this->setContent('Content');
+        $this->setFooter($footer->render('footer.tpl.php'));
     }
 }

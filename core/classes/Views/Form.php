@@ -36,6 +36,31 @@ class Form extends \Core\Abstracts\Views\Form
     }
 
     /**
+     * Gets form submitted data
+     * If $filtered = false, returns $_POST if not empty (or null)
+     * If $filtered = true, returns filtered $_POST array
+     * based on form array: $this->data
+     *
+     * DO NOT CALL any functions, it has to be full-code
+     *
+     * @param bool $filter
+     * @return array|null
+     */
+    public function getSubmitData($filter = true): ?array
+    {
+        if ($filter) {
+            $filter_parameters = [];
+            foreach ($this->data['fields'] as $key => $field) {
+                $filter_parameters[$key] = $field['filter'] ?? FILTER_SANITIZE_SPECIAL_CHARS;
+            }
+
+            return filter_input_array(INPUT_POST, $filter_parameters);
+        }
+
+        return $_POST;
+    }
+
+    /**
      * Validates form based on $this->data
      * Does NOT call any callbacks, just returns the result
      * of the form
@@ -85,30 +110,5 @@ class Form extends \Core\Abstracts\Views\Form
         }
 
         return $success;
-    }
-
-    /**
-     * Gets form submitted data
-     * If $filtered = false, returns $_POST if not empty (or null)
-     * If $filtered = true, returns filtered $_POST array
-     * based on form array: $this->data
-     *
-     * DO NOT CALL any functions, it has to be full-code
-     *
-     * @param bool $filter
-     * @return array|null
-     */
-    public function getSubmitData($filter = true): ?array
-    {
-        if ($filter) {
-            $filter_parameters = [];
-            foreach ($this->data['fields'] as $key => $field) {
-                $filter_parameters[$key] = $field['filter'] ?? FILTER_SANITIZE_SPECIAL_CHARS;
-            }
-
-            return filter_input_array(INPUT_POST, $filter_parameters);
-        }
-
-        return $_POST;
     }
 }

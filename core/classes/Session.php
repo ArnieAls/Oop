@@ -50,6 +50,8 @@ class Session
     }
 
     /**
+     * Get user if logged in
+     *
      * @return array|null
      */
     public function getUser(): ?array
@@ -68,7 +70,7 @@ class Session
         session_destroy();
         $_SESSION = [];
         if ($redirect) {
-            header("Location: $redirect");
+            header('Location: $redirect');
             exit;
         }
     }
